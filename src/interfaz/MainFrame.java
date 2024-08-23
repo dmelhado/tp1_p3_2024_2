@@ -84,8 +84,7 @@ public class MainFrame extends JFrame {
 		btnSalir.setBounds(222, 286, 154, 43);
 		getContentPane().add(btnSalir);
 		
-		revalidate();
-		repaint();
+		
 	}
 	
 	
@@ -122,7 +121,7 @@ public class MainFrame extends JFrame {
 				}
 			});
 			btnVolver.setBounds(222, 150, 154, 43);
-			add(btnVolver);
+			getContentPane().add(btnVolver);
 		  
 		  revalidate();
 		  repaint();
