@@ -1,4 +1,4 @@
-package interfaz;
+package tp1_p3_2024_2;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

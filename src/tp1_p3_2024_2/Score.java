@@ -4,17 +4,12 @@ package tp1_p3_2024_2;
 
 public class Score {
     private int score;
-    private int betterScore;
+    private int bestScore;
 
     // Constructor
-    public Score() {
+    public Score(int bestScore) {
         this.score = 0;
-        this.betterScore = 0;
-    }
-
-    public Score(int initialScore) {
-        this.score = initialScore;
-        this.betterScore = initialScore;
+        this.bestScore = bestScore;
     }
 
     public void addPoints() {
@@ -27,9 +22,9 @@ public class Score {
     
     
     // deberia llamarlo cuando termine la partida para comparar, no lo puedo llamar antes porque si no se guardaria siempre 1 movimiento solo
-    public void updateBetterScore() {
-        if (this.score < this.betterScore) {
-            this.betterScore = this.score;
+    public void updateBestScore() {
+        if (this.score < this.bestScore) {
+            this.bestScore = this.score;
         }
     }
 
@@ -37,12 +32,12 @@ public class Score {
         return this.score;
     }
 
-    public int getBetterScore() {
-        return this.betterScore;
+    public int getBestScore() {
+        return this.bestScore;
     }
 
     @Override
     public String toString() {
-        return "Score: " + this.score + ", High Score: " + this.betterScore;
+        return "Score: " + this.score + ", High Score: " + this.bestScore;
     }
 }

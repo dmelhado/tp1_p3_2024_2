@@ -8,10 +8,6 @@ public class GameBoard {
 	private int blankX;
 	private int blankY;
 
-	public enum Direction {
-		U, D, L, R
-	}
-
 	public GameBoard(int s) {
 		this.size = s;
 		this.board = new int[s][s];
@@ -84,6 +80,10 @@ public class GameBoard {
 		}
 	}
 
+	public int[][] getBoard(){
+		return this.board;
+	}
+	
 	public boolean checkWinState() {
 
 		boolean res = true;
