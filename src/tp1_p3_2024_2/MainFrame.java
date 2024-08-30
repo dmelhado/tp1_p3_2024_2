@@ -7,7 +7,9 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,7 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MainFrame extends JFrame {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -97,6 +99,10 @@ public class MainFrame extends JFrame {
 	
 	  private void iniciarJuego() {
 		  	getContentPane().removeAll();  // Quitar todos los componentes actuales
+		  	
+		  	int boardSize = 4;
+		  	Controller controller = new Controller(boardSize, 0);
+		  	
 	        setTitle("Rompecabezas Deslizante");
 	        setSize(640, 480);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,6 +130,18 @@ public class MainFrame extends JFrame {
 			panelPrincipal.add(panelCentral, BorderLayout.CENTER);
 			panelCentral.setLayout(new GridLayout(4, 4, 0, 0));
 			
+			// nombres de cabecera, pero realmente no hacen falta
+			String[] columnNames = new String[boardSize];
+	        for (int i = 0; i < boardSize; i++) {
+	            columnNames[i] = "";
+	        }
+			
+	        DefaultTableModel model = new DefaultTableModel(controller.getBoard(), columnNames);
+	        JTable table = new JTable(model);
+	        panelCentral.add(table);
+	        
+	        
+			/*
 			JButton espacioUno = new JButton("1");
 			espacioUno.setFont(new Font("Lucida Fax", Font.BOLD, 25));
 			panelCentral.add(espacioUno);
@@ -189,6 +207,7 @@ public class MainFrame extends JFrame {
 			JButton espacioQuince = new JButton("15");
 			espacioQuince.setFont(new Font("Lucida Fax", Font.BOLD, 25));
 			panelCentral.add(espacioQuince);
+			*/
 			
 			JPanel panelIzquierda = new JPanel();
 			panelPrincipal.add(panelIzquierda, BorderLayout.WEST);

@@ -10,7 +10,7 @@ public class Controller {
 		this.score = new Score(bestScore);
 		
 		// puede que haga falta sacarlo del constructor y que sea su propio metodo.
-		this.board.randomize(size * size * 2);
+		this.board.randomize(size * size * 4);
 	}
 	
 	// conviene devolver un boolean.
@@ -27,7 +27,7 @@ public class Controller {
 	// GETTERS:
 	
 	// para devolverle a la interfaz lo que tiene que dibujar
-	public int[][] getBoard(){
+	public Object[][] getBoard(){
 		return this.board.getBoard();
 	}
 	

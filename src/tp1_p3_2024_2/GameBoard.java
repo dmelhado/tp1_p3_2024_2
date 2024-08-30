@@ -80,8 +80,15 @@ public class GameBoard {
 		}
 	}
 
-	public int[][] getBoard(){
-		return this.board;
+	// la tabla de WindowBuilder NECESITA Object[][]
+	public Object[][] getBoard(){
+		Object[][] res = new Object[this.size][this.size];
+		for(int i = 0; i < this.size; i++) {
+			for(int j = 0; j < this.size; j++) {
+				res[j][i] = this.board[i][j];
+			}
+		}
+		return res;
 	}
 	
 	public boolean checkWinState() {
