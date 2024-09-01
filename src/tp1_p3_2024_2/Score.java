@@ -5,11 +5,12 @@ package tp1_p3_2024_2;
 public class Score {
     private int score;
     private int bestScore;
-
+    public boolean randomScore;
     // Constructor
     public Score(int bestScore) {
-        this.score = 0;
+        this.score = 0;  
         this.bestScore = bestScore;
+        this.randomScore=false;
     }
 
     public void addPoints() {
@@ -40,4 +41,13 @@ public class Score {
     public String toString() {
         return "Score: " + this.score + ", High Score: " + this.bestScore;
     }
+
+	public boolean getRandomScore() {
+		return randomScore;
+	}
+
+	public void setRandomScore(boolean randomScore) {
+		this.randomScore = randomScore;
+	}
+    
 }

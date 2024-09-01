@@ -35,6 +35,9 @@ public class GameBoard {
 	            }
 	        }
 	    }
+	    this.randomize(20); //aca podemos agregar como dijo Ema mayor dificultad y mayor cantidad de random
+	    gameScore.setRandomScore(true);
+	    
 	}
 
 	// true si movio ok, false si no se pudo mover
@@ -66,7 +69,9 @@ public class GameBoard {
 	    this.board[nextX][nextY] = 0;
 	    this.blankX = nextX;
 	    this.blankY = nextY;
-	    gameScore.addPoints();
+	    if(gameScore.getRandomScore()==true) {
+	    	gameScore.addPoints();
+	    }
 	    return true;
 	}
 
@@ -75,6 +80,7 @@ public class GameBoard {
 	// pero esto por ahora deberia servir
 	// TODO: esta funcion no va a servir si se quiere ver como se randomiza todo en vivo 
 	// desde la interfaz
+	    
 	public void randomize(int c) {
 		Random r = new Random();
 		while (c > 0) {
@@ -85,6 +91,7 @@ public class GameBoard {
 				c--;
 			}
 		}
+	
 	}
 
 	// la tabla de WindowBuilder NECESITA Object[][]
@@ -98,7 +105,7 @@ public class GameBoard {
 		return res;
 	}
 	
-	public boolean checkWinState() {
+	/*public boolean checkWinState() {
 		boolean res = true;
 		int count = 1;
 		int boardLength = this.size * this.size;
@@ -119,7 +126,30 @@ public class GameBoard {
 
 		return res;
 
+	}*/
+	
+	public boolean checkWinState() {
+	    int count = 1;
+	    int boardLength = this.size * this.size;
+
+	    // Verificar cada posición excepto la última
+	    for (int i = 0; i < this.size; i++) {
+	        for (int j = 0; j < this.size; j++) {
+	            // La última posición debe ser 0 (espacio en blanco)
+	            if (i == this.size - 1 && j == this.size - 1) {
+	                return this.board[i][j] == 0;
+	            }
+	            // Si el valor en la posición no es el esperado, no ha ganado
+	            if (this.board[i][j] != count) {
+	                return false;
+	            }
+	            count++;
+	        }
+	    }
+
+	    return true;
 	}
+
 
 	//getters y setters
 	public int getBoardValue(int x, int y) {

@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -10,14 +11,18 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import tp1_p3_2024_2.GameBoard;
 import tp1_p3_2024_2.GameBoard.Direction;
+import tp1_p3_2024_2.Score;
 
 public class MainFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private GameBoard gameBoard; 
     private JButton[][] buttons; 
+    private JLabel scoreLabel; // Nuevo JLabel para el puntaje
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -47,7 +52,7 @@ public class MainFrame extends JFrame {
         getContentPane().setLayout(null); 
 
         
-        JLabel lblTitulo = new JLabel("Rompecabezas Deslizante");
+        JLabel lblTitulo = new JLabel("titulo del juego");
         lblTitulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 34));
         lblTitulo.setBounds(154, 23, 312, 51);
         getContentPane().add(lblTitulo);
@@ -86,41 +91,57 @@ public class MainFrame extends JFrame {
     private void iniciarJuego() {
         getContentPane().removeAll(); 
         setTitle("Rompecabezas Deslizante"); 
-        getContentPane().setLayout(new GridLayout(4, 4)); 
+
+       
+        getContentPane().setLayout(new BorderLayout());
+
+        
+        JPanel topPanel = new JPanel(new BorderLayout());
+        getContentPane().add(topPanel, BorderLayout.NORTH);
+
+        JLabel lblTitulo = new JLabel("Titulo de juego");
+        lblTitulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 34));
+        topPanel.add(lblTitulo, BorderLayout.WEST);
+
+        scoreLabel = new JLabel("Puntaje: 0"); 
+        scoreLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        topPanel.add(scoreLabel, BorderLayout.EAST);
+
+        // Panel central para el tablero
+        JPanel gamePanel = new JPanel(new GridLayout(4, 4));
+        getContentPane().add(gamePanel, BorderLayout.CENTER);
 
         gameBoard = new GameBoard(4); 
         buttons = new JButton[4][4];
 
-     
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 JButton button = new JButton();
                 buttons[i][j] = button;
-                button.setFont(new Font("Arial", Font.PLAIN, 24)); //
+                button.setFont(new Font("Arial", Font.PLAIN, 24)); 
                 button.addActionListener(new ButtonClickListener(i, j)); 
-                getContentPane().add(button);
+                gamePanel.add(button);
             }
         }
 
         actualizarTablero(); 
 
-   
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 Direction dir = null;
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_W: dir = Direction.U; break; // arriba
-                    case KeyEvent.VK_UP: dir = Direction.U; break; // arriba
-                    case KeyEvent.VK_S: dir = Direction.D; break; // Abajo
-                    case KeyEvent.VK_DOWN: dir = Direction.D; break; // abajo
-                    case KeyEvent.VK_A: dir = Direction.L; break; // izquierda
-                    case KeyEvent.VK_LEFT: dir = Direction.L; break; // izquierda
-                    case KeyEvent.VK_D: dir = Direction.R; break; // derecha
-                    case KeyEvent.VK_RIGHT: dir = Direction.R; break; // derecha
+                    case KeyEvent.VK_W: dir = Direction.U; break; 
+                    case KeyEvent.VK_UP: dir = Direction.U; break; 
+                    case KeyEvent.VK_S: dir = Direction.D; break; 
+                    case KeyEvent.VK_DOWN: dir = Direction.D; break; 
+                    case KeyEvent.VK_A: dir = Direction.L; break; 
+                    case KeyEvent.VK_LEFT: dir = Direction.L; break; 
+                    case KeyEvent.VK_D: dir = Direction.R; break; 
+                    case KeyEvent.VK_RIGHT: dir = Direction.R; break; 
                 }
                 if (dir != null && gameBoard.move(dir)) {
-                    actualizarTablero(); // todo ok actualiza tablero
+                    actualizarTablero(); 
                 }
             }
         });
@@ -129,22 +150,28 @@ public class MainFrame extends JFrame {
         requestFocus(); 
 
         revalidate(); 
-        repaint(); // actualiza pantalla
+        repaint(); 
     }
 
-    // a el contenido de los botones
     private void actualizarTablero() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                int valor = gameBoard.getBoardValue(i, j); // Obtiene el valor de la celda
-                buttons[i][j].setText(valor == 0 ? "" : String.valueOf(valor)); // Actualiza el texto del botón
+                int valor = gameBoard.getBoardValue(i, j);
+                buttons[i][j].setText(valor == 0 ? "" : String.valueOf(valor));
             }
         }
-        revalidate(); // todo ok?
-        repaint(); // pantalla de nuevo
+
+        scoreLabel.setText("Puntaje: " + gameBoard.getGameScore().getScore());
+        
+        if (gameBoard.checkWinState()) {
+            JOptionPane.showMessageDialog(this, "¡Felicidades! Has ganado el juego con un puntaje de " + gameBoard.getGameScore().getScore() + ".", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        revalidate();
+        repaint();
     }
 
-   
+
     private class ButtonClickListener implements ActionListener {
         private int x, y;
 
@@ -153,13 +180,11 @@ public class MainFrame extends JFrame {
             this.y = y;
         }
 
-        @Override
         public void actionPerformed(ActionEvent e) {
             Direction dir = null;
             int blankX = gameBoard.getBlankX(); 
             int blankY = gameBoard.getBlankY();
 
-           
             if (x == blankX && y == blankY + 1) {
                 dir = Direction.U;  // Arriba
             } else if (x == blankX && y == blankY - 1) {
@@ -183,13 +208,11 @@ public class MainFrame extends JFrame {
         setSize(640, 480);
         getContentPane().setLayout(null); 
 
-  
         JLabel lblOpciones = new JLabel("Estas en opciones");
         lblOpciones.setFont(new Font("Arial", Font.PLAIN, 24));
         lblOpciones.setBounds(220, 150, 200, 30);
         getContentPane().add(lblOpciones);
 
-   
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
