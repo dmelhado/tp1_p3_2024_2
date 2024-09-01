@@ -1,70 +1,73 @@
 package tp1_p3_2024_2;
 
 import java.util.Random;
+import tp1_p3_2024_2.Score;
 
 public class GameBoard {
 	private int[][] board;
 	private int size;
 	private int blankX;
 	private int blankY;
-
 	public enum Direction {
 		U, D, L, R
 	}
+	
+	Score gameScore = new Score(); 
+	
 
 	public GameBoard(int s) {
-		this.size = s;
-		this.board = new int[s][s];
+	    this.size = s;
+	    this.board = new int[s][s];
 
-		// poblar tablero con solucion (pues es una instancia valida)
-		for (int i = 0; i < s; i++) {
-			for (int j = 0; j < s; j++) {
-				this.board[i][j] = i + (j * this.size) + 1;
+	    // Poblar tablero con solución (ordenado horizontalmente)
+	    int number = 1; // Comenzar desde 1
+	    for (int i = 0; i < s; i++) {
+	        for (int j = 0; j < s; j++) {
+	            // Asignar el número actual
+	            this.board[i][j] = number;
+	            number++;
 
-				// si es el ultimo casillero, llenar con 0 y guardar posicion
-				if (i == s - 1 && j == s - 1) {
-					this.board[i][j] = 0;
-					this.blankX = i;
-					this.blankY = j;
-				}
-			}
-		}
+	            // Si es el último casillero, llenarlo con 0 y guardar la posición
+	            if (i == s - 1 && j == s - 1) {
+	                this.board[i][j] = 0;
+	                this.blankX = i;
+	                this.blankY = j;
+	            }
+	        }
+	    }
 	}
 
 	// true si movio ok, false si no se pudo mover
 	public boolean move(Direction dir) {
+	    int nextX = this.blankX;
+	    int nextY = this.blankY;
 
-		int nextX = this.blankX;
-		int nextY = this.blankY;
+	    switch (dir) {
+	        case U:
+	            nextX--;  // Mover arriba significa decrementar X
+	            break;
+	        case D:
+	            nextX++;  // Mover abajo significa incrementar X
+	            break;
+	        case L:
+	            nextY--;  // Mover izquierda significa decrementar Y
+	            break;
+	        case R:
+	            nextY++;  // Mover derecha significa incrementar Y
+	            break;
+	    }
 
-		// TODO: Quiza haya que invertir los movimientos, o agregar una opcion
-		switch (dir) {
-		case U:
-			nextY--;
-			break;
-		case D:
-			nextY++;
-			break;
-		case L:
-			nextX--;
-			break;
-		case R:
-			nextX++;
-			break;
-		}
+	    if (nextX < 0 || nextX >= this.size || nextY < 0 || nextY >= this.size) {
+	        return false;
+	    }
 
-		if (nextX < 0 || nextX >= this.size || nextY < 0 || nextY >= this.size) {
-			return false;
-		}
-
-		// todo ok. mover piezas y posicion del vacio
-		this.board[this.blankX][this.blankY] = this.board[nextX][nextY];
-		this.board[nextX][nextY] = 0;
-		this.blankX = nextX;
-		this.blankY = nextY;
-
-		return true;
-
+	    // Realizar el movimiento
+	    this.board[this.blankX][this.blankY] = this.board[nextX][nextY];
+	    this.board[nextX][nextY] = 0;
+	    this.blankX = nextX;
+	    this.blankY = nextY;
+	    gameScore.addPoints();
+	    return true;
 	}
 
 	// se pueden hacer cosas un poco mas locas para hacer un random mas "equilibrado"
@@ -85,7 +88,6 @@ public class GameBoard {
 	}
 
 	public boolean checkWinState() {
-
 		boolean res = true;
 		int count = 1;
 		int boardLength = this.size * this.size;
@@ -106,6 +108,52 @@ public class GameBoard {
 
 		return res;
 
+	}
+
+	//getters y setters
+	public int getBoardValue(int x, int y) {
+	    return this.board[x][y];
+	}
+
+
+	public int[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(int[][] board) {
+		this.board = board;
+	}
+
+	public int getBlankX() {
+		return blankX;
+	}
+
+	public void setBlankX(int blankX) {
+		this.blankX = blankX;
+	}
+
+	public int getBlankY() {
+		return blankY;
+	}
+
+	public void setBlankY(int blankY) {
+		this.blankY = blankY;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public Score getGameScore() {
+		return gameScore;
+	}
+
+	public void setGameScore(Score gameScore) {
+		this.gameScore = gameScore;
 	}
 
 }
