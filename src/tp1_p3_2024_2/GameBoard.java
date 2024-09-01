@@ -12,8 +12,8 @@ public class GameBoard {
 		U, D, L, R
 	}
 	
-	Score gameScore = new Score(); 
-	
+	Score gameScore = new Score(0); 
+
 
 	public GameBoard(int s) {
 	    this.size = s;
@@ -87,6 +87,17 @@ public class GameBoard {
 		}
 	}
 
+	// la tabla de WindowBuilder NECESITA Object[][]
+	public Object[][] getBoard(){
+		Object[][] res = new Object[this.size][this.size];
+		for(int i = 0; i < this.size; i++) {
+			for(int j = 0; j < this.size; j++) {
+				res[j][i] = this.board[i][j];
+			}
+		}
+		return res;
+	}
+	
 	public boolean checkWinState() {
 		boolean res = true;
 		int count = 1;
@@ -116,7 +127,7 @@ public class GameBoard {
 	}
 
 
-	public int[][] getBoard() {
+	public int[][] getBoard1() {
 		return board;
 	}
 
