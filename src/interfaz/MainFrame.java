@@ -16,6 +16,10 @@ import javax.swing.JPanel;
 import tp1_p3_2024_2.GameBoard;
 import tp1_p3_2024_2.GameBoard.Direction;
 import tp1_p3_2024_2.Score;
+import javax.swing.SwingConstants;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class MainFrame extends JFrame {
 
@@ -39,7 +43,7 @@ public class MainFrame extends JFrame {
 
   
     public MainFrame() {
-        MenuPrincipal();
+        iniciarJuego();
     }
 
    
@@ -91,21 +95,27 @@ public class MainFrame extends JFrame {
     private void iniciarJuego() {
         getContentPane().removeAll(); 
         setTitle("Rompecabezas Deslizante"); 
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setBounds(100, 100, 640, 480); 
+        getContentPane().setLayout(null); 
 
        
         getContentPane().setLayout(new BorderLayout());
 
         
-        JPanel topPanel = new JPanel(new BorderLayout());
+        JPanel topPanel = new JPanel();
         getContentPane().add(topPanel, BorderLayout.NORTH);
+        topPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
         JLabel lblTitulo = new JLabel("Titulo de juego");
         lblTitulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 34));
-        topPanel.add(lblTitulo, BorderLayout.WEST);
+        topPanel.add(lblTitulo);
 
         scoreLabel = new JLabel("Puntaje: 0"); 
+        scoreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         scoreLabel.setFont(new Font("Arial", Font.PLAIN, 24));
-        topPanel.add(scoreLabel, BorderLayout.EAST);
+        topPanel.add(scoreLabel);
 
         // Panel central para el tablero
         JPanel gamePanel = new JPanel(new GridLayout(4, 4));
@@ -147,6 +157,44 @@ public class MainFrame extends JFrame {
         });
 
         setFocusable(true); 
+        
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        
+        JMenu opcionMenu = new JMenu("Juego");
+        menuBar.add(opcionMenu);
+        
+        JMenuItem VolverMenu = new JMenuItem("Volver al Menú");
+        opcionMenu.add(VolverMenu);
+        VolverMenu.addActionListener(new ActionListener() 
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		setJMenuBar(null);
+        		revalidate(); 
+                repaint(); 
+        		MenuPrincipal();
+        	}
+        });
+        
+        JMenuItem SalirJuego = new JMenuItem("Salir del Juego");
+        opcionMenu.add(SalirJuego);
+        SalirJuego.addActionListener(new ActionListener() 
+        {
+        	 public void actionPerformed(ActionEvent e)
+         	{
+         		Object[] options = { "Si", "No" };
+         		int opcion = JOptionPane.showOptionDialog(gamePanel, "¿Estas seguro que deseas salir del juego?" , "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+         		if(JOptionPane.YES_OPTION == opcion)
+         		{
+         			salirDelJuego();
+         		}
+         	}
+        });
+        
+        	
+        JMenu opcionAyuda = new JMenu("Ayuda");
+        menuBar.add(opcionAyuda);
         requestFocus(); 
 
         revalidate(); 
