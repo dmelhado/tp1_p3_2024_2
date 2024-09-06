@@ -17,16 +17,26 @@ import tp1_p3_2024_2.GameBoard;
 import tp1_p3_2024_2.GameBoard.Direction;
 import tp1_p3_2024_2.Score;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.CardLayout;
 
 public class MainFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private GameBoard gameBoard; 
-    private JButton[][] buttons; 
-    private JLabel scoreLabel; // Nuevo JLabel para el puntaje
+    //IDENTIFICADORES DE VENTANA//
+    final static String VENTANAMENU = "Ventana Menu";
+    final static String VENTANAJUEGO = "Ventana Juego";
+    final static String VENTANAOPCIONES = "Ventana Opciones";
+    private VentanaMenu ventanaMenu;
+    private VentanaOpciones ventanaOpciones;
+    private VentanaJuego ventanaJuego;
+    private CardLayout cardLayout;
+    
+    
+    
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -43,239 +53,95 @@ public class MainFrame extends JFrame {
 
   
     public MainFrame() {
-        iniciarJuego();
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	setBounds(100,100,640,480);
+    	getContentPane().setLayout(new CardLayout(0, 0));
+    	cardLayout = new CardLayout();
+    	getContentPane().setLayout(cardLayout);
+    	
+    	ventanaMenu = new VentanaMenu(this);
+        ventanaOpciones = new VentanaOpciones(this);
+       
+        
+    	
+    	
+          
+          // añade ventanas al contenedor
+        
+    	getContentPane().add(ventanaMenu, VENTANAMENU);
+    	getContentPane().add(ventanaOpciones, VENTANAOPCIONES);
+    	
+    	
+    	
+    	revalidate();
+    	repaint();
+    	 
+        
+    }
+    
+    public void cambiarVentana(String ventana)
+    {
+    	if(ventana.equals(VENTANAJUEGO))
+    	{
+    		agregarMenuJuego();
+    		ventanaJuego = new VentanaJuego(this);
+    		getContentPane().add(ventanaJuego, VENTANAJUEGO);
+    		revalidate();
+        	repaint();
+    		
+    	} else {
+    		setJMenuBar(null);
+    	}
+    	
+    	cardLayout.show(getContentPane(), ventana);
+    	getContentPane().revalidate();
+    	getContentPane().repaint();
+    }
+    
+    public void agregarMenuJuego()
+    {
+    	 JMenuBar menuBar = new JMenuBar();
+	        setJMenuBar(menuBar);
+	        
+	        JMenu opcionMenu = new JMenu("Juego");
+	        menuBar.add(opcionMenu);
+	        
+	        JMenuItem VolverMenu = new JMenuItem("Volver al Menú");
+	        opcionMenu.add(VolverMenu);
+	        VolverMenu.addActionListener(new ActionListener() 
+	        {
+	        	public void actionPerformed(ActionEvent e)
+	        	{
+	        		cambiarVentana(VENTANAMENU);
+	        	}
+	        	});
+	        
+	        JMenuItem SalirJuego = new JMenuItem("Salir del Juego");
+	        opcionMenu.add(SalirJuego);
+	        SalirJuego.addActionListener(new ActionListener() 
+	        {
+	        	 public void actionPerformed(ActionEvent e)
+	         	{
+	         		Object[] options = { "Si", "No" };
+	         		int opcion = JOptionPane.showOptionDialog(ventanaJuego, "¿Estas seguro que deseas salir del juego?" , "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+	         		if(JOptionPane.YES_OPTION == opcion)
+	         		{
+	         			dispose();
+	         		}
+	         	}
+	        });
+	        
+	        	
+	        JMenu opcionAyuda = new JMenu("Ayuda");
+	        menuBar.add(opcionAyuda);
     }
 
    
-    private void MenuPrincipal() {
-        getContentPane().removeAll(); 
-        getContentPane().repaint(); 
-        setTitle("Rompecabezas Deslizante"); 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        setBounds(100, 100, 640, 480); 
-        getContentPane().setLayout(null); 
+   
 
-        
-        JLabel lblTitulo = new JLabel("titulo del juego");
-        lblTitulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 34));
-        lblTitulo.setBounds(154, 23, 312, 51);
-        getContentPane().add(lblTitulo);
-
-      
-        JButton btnIniciar = new JButton("INICIAR");
-        btnIniciar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                iniciarJuego(); //
-            }
-        });
-        btnIniciar.setBounds(222, 150, 154, 43);
-        getContentPane().add(btnIniciar);
-
-        
-        JButton btnOpciones = new JButton("OPCIONES");
-        btnOpciones.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                iniciarOpciones(); 
-            }
-        });
-        btnOpciones.setBounds(222, 215, 154, 43);
-        getContentPane().add(btnOpciones);
-
-     
-        JButton btnSalir = new JButton("SALIR");
-        btnSalir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                salirDelJuego(); 
-            }
-        });
-        btnSalir.setBounds(222, 286, 154, 43);
-        getContentPane().add(btnSalir);
-    }
-
-    private void iniciarJuego() {
-        getContentPane().removeAll(); 
-        setTitle("Rompecabezas Deslizante"); 
-        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        setBounds(100, 100, 640, 480); 
-        getContentPane().setLayout(null); 
-
-       
-        getContentPane().setLayout(new BorderLayout());
-
-        
-        JPanel topPanel = new JPanel();
-        getContentPane().add(topPanel, BorderLayout.NORTH);
-        topPanel.setLayout(new GridLayout(0, 2, 0, 0));
-
-        JLabel lblTitulo = new JLabel("Titulo de juego");
-        lblTitulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 34));
-        topPanel.add(lblTitulo);
-
-        scoreLabel = new JLabel("Puntaje: 0"); 
-        scoreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        scoreLabel.setFont(new Font("Arial", Font.PLAIN, 24));
-        topPanel.add(scoreLabel);
-
-        // Panel central para el tablero
-        JPanel gamePanel = new JPanel(new GridLayout(4, 4));
-        getContentPane().add(gamePanel, BorderLayout.CENTER);
-
-        gameBoard = new GameBoard(4); 
-        buttons = new JButton[4][4];
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                JButton button = new JButton();
-                buttons[i][j] = button;
-                button.setFont(new Font("Arial", Font.PLAIN, 24)); 
-                button.addActionListener(new ButtonClickListener(i, j)); 
-                gamePanel.add(button);
-            }
-        }
-
-        actualizarTablero(); 
-
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                Direction dir = null;
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_W: dir = Direction.U; break; 
-                    case KeyEvent.VK_UP: dir = Direction.U; break; 
-                    case KeyEvent.VK_S: dir = Direction.D; break; 
-                    case KeyEvent.VK_DOWN: dir = Direction.D; break; 
-                    case KeyEvent.VK_A: dir = Direction.L; break; 
-                    case KeyEvent.VK_LEFT: dir = Direction.L; break; 
-                    case KeyEvent.VK_D: dir = Direction.R; break; 
-                    case KeyEvent.VK_RIGHT: dir = Direction.R; break; 
-                }
-                if (dir != null && gameBoard.move(dir)) {
-                    actualizarTablero(); 
-                }
-            }
-        });
-
-        setFocusable(true); 
-        
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-        
-        JMenu opcionMenu = new JMenu("Juego");
-        menuBar.add(opcionMenu);
-        
-        JMenuItem VolverMenu = new JMenuItem("Volver al Menú");
-        opcionMenu.add(VolverMenu);
-        VolverMenu.addActionListener(new ActionListener() 
-        {
-        	public void actionPerformed(ActionEvent e)
-        	{
-        		setJMenuBar(null);
-        		revalidate(); 
-                repaint(); 
-        		MenuPrincipal();
-        	}
-        });
-        
-        JMenuItem SalirJuego = new JMenuItem("Salir del Juego");
-        opcionMenu.add(SalirJuego);
-        SalirJuego.addActionListener(new ActionListener() 
-        {
-        	 public void actionPerformed(ActionEvent e)
-         	{
-         		Object[] options = { "Si", "No" };
-         		int opcion = JOptionPane.showOptionDialog(gamePanel, "¿Estas seguro que deseas salir del juego?" , "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
-         		if(JOptionPane.YES_OPTION == opcion)
-         		{
-         			salirDelJuego();
-         		}
-         	}
-        });
-        
-        	
-        JMenu opcionAyuda = new JMenu("Ayuda");
-        menuBar.add(opcionAyuda);
-        requestFocus(); 
-
-        revalidate(); 
-        repaint(); 
-    }
-
-    private void actualizarTablero() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                int valor = gameBoard.getBoardValue(i, j);
-                buttons[i][j].setText(valor == 0 ? "" : String.valueOf(valor));
-            }
-        }
-
-        scoreLabel.setText("Puntaje: " + gameBoard.getGameScore().getScore());
-        
-        if (gameBoard.checkWinState()) {
-            JOptionPane.showMessageDialog(this, "¡Felicidades! Has ganado el juego con un puntaje de " + gameBoard.getGameScore().getScore() + ".", "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        revalidate();
-        repaint();
-    }
-
-
-    private class ButtonClickListener implements ActionListener {
-        private int x, y;
-
-        public ButtonClickListener(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            Direction dir = null;
-            int blankX = gameBoard.getBlankX(); 
-            int blankY = gameBoard.getBlankY();
-
-            if (x == blankX && y == blankY + 1) {
-                dir = Direction.U;  // Arriba
-            } else if (x == blankX && y == blankY - 1) {
-                dir = Direction.D;  // Abajo
-            } else if (y == blankY && x == blankX + 1) {
-                dir = Direction.L;  // Izquierda
-            } else if (y == blankY && x == blankX - 1) {
-                dir = Direction.R;  // Derecha
-            }
-
-            if (dir != null && gameBoard.move(dir)) {
-                actualizarTablero(); 
-            }
-        }
-    }
-
+   
     
-    private void iniciarOpciones() {
-        getContentPane().removeAll(); 
-        setTitle("Opciones");
-        setSize(640, 480);
-        getContentPane().setLayout(null); 
-
-        JLabel lblOpciones = new JLabel("Estas en opciones");
-        lblOpciones.setFont(new Font("Arial", Font.PLAIN, 24));
-        lblOpciones.setBounds(220, 150, 200, 30);
-        getContentPane().add(lblOpciones);
-
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                MenuPrincipal(); 
-            }
-        });
-        btnVolver.setBounds(222, 215, 154, 43);
-        getContentPane().add(btnVolver);
-
-        revalidate(); 
-        repaint(); 
-    }
-
+  
     
-    private void salirDelJuego() {
-        dispose();
-    }
+    
 }
