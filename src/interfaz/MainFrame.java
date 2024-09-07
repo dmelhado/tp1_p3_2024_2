@@ -1,23 +1,11 @@
 package interfaz;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import tp1_p3_2024_2.GameBoard;
-import tp1_p3_2024_2.GameBoard.Direction;
-import tp1_p3_2024_2.Score;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;

@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -27,7 +28,28 @@ public class VentanaJuego extends JPanel {
 	
 	public VentanaJuego(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
+		gameBoard = new GameBoard(4); 
 		iniciarJuego();
+		
+		addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                Direction dir = null;
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_W: dir = Direction.U; break; 
+                    case KeyEvent.VK_UP: dir = Direction.U; break; 
+                    case KeyEvent.VK_S: dir = Direction.D; break; 
+                    case KeyEvent.VK_DOWN: dir = Direction.D; break; 
+                    case KeyEvent.VK_A: dir = Direction.L; break; 
+                    case KeyEvent.VK_LEFT: dir = Direction.L; break; 
+                    case KeyEvent.VK_D: dir = Direction.R; break; 
+                    case KeyEvent.VK_RIGHT: dir = Direction.R; break; 
+                }
+                if (dir != null && gameBoard.move(dir)) {
+                    actualizarTablero(); 
+                }
+            }
+        });
 
 	}
 	
@@ -40,29 +62,42 @@ public class VentanaJuego extends JPanel {
 	        
 	        JPanel topPanel = new JPanel();
 	        add(topPanel, BorderLayout.NORTH);
-	        topPanel.setLayout(new GridLayout(0, 2, 0, 0));
+	        topPanel.setLayout(new BorderLayout(0, 0));
 
-	        JLabel lblTitulo = new JLabel("Titulo de juego");
-	        lblTitulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 34));
+	        JLabel lblTitulo = new JLabel("Rompecabezas Deslizante");
+	        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+	        lblTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 34));
 	        topPanel.add(lblTitulo);
-
-	        scoreLabel = new JLabel("Puntaje: 0"); 
-	        scoreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-	        scoreLabel.setFont(new Font("Arial", Font.PLAIN, 24));
-	        topPanel.add(scoreLabel);
 
 	        // Panel central para el tablero
 	        JPanel gamePanel = new JPanel(new GridLayout(4, 4));
 	        add(gamePanel, BorderLayout.CENTER);
+	        
+	        JPanel botPanel = new JPanel();
+	        add(botPanel, BorderLayout.SOUTH);
+	        
+	        	        scoreLabel = new JLabel("Puntaje: 0"); 
+	        	        botPanel.add(scoreLabel);
+	        	        scoreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+	        	        scoreLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+	        
+	        JPanel leftPanel = new JPanel();
+	        add(leftPanel, BorderLayout.WEST);
+	        
+	        JPanel RightPanel = new JPanel();
+	        add(RightPanel, BorderLayout.EAST);
 
-	        gameBoard = new GameBoard(4); 
+	        
 	        buttons = new JButton[4][4];
 
 	        for (int i = 0; i < 4; i++) {
 	            for (int j = 0; j < 4; j++) {
 	                JButton button = new JButton();
 	                buttons[i][j] = button;
-	                button.setFont(new Font("Arial", Font.PLAIN, 24)); 
+	                
+	                
+	        		button.setBackground(new Color(255, 255, 255));
+	        		button.setFont(new Font("Lucida Fax", Font.BOLD, 25));
 	                button.addActionListener(new ButtonClickListener(i, j)); 
 	                gamePanel.add(button);
 	            }
@@ -70,29 +105,10 @@ public class VentanaJuego extends JPanel {
 
 	        actualizarTablero(); 
 
-	        addKeyListener(new KeyAdapter() {
-	            @Override
-	            public void keyPressed(KeyEvent e) {
-	                Direction dir = null;
-	                switch (e.getKeyCode()) {
-	                    case KeyEvent.VK_W: dir = Direction.U; break; 
-	                    case KeyEvent.VK_UP: dir = Direction.U; break; 
-	                    case KeyEvent.VK_S: dir = Direction.D; break; 
-	                    case KeyEvent.VK_DOWN: dir = Direction.D; break; 
-	                    case KeyEvent.VK_A: dir = Direction.L; break; 
-	                    case KeyEvent.VK_LEFT: dir = Direction.L; break; 
-	                    case KeyEvent.VK_D: dir = Direction.R; break; 
-	                    case KeyEvent.VK_RIGHT: dir = Direction.R; break; 
-	                }
-	                if (dir != null && gameBoard.move(dir)) {
-	                    actualizarTablero(); 
-	                }
-	            }
-	        });
+	        
 
-	        setFocusable(true); 
+	        setFocusable(true);
 	        requestFocusInWindow(); 
-
 	        revalidate(); 
 	        repaint(); 
 	    }
@@ -102,7 +118,15 @@ public class VentanaJuego extends JPanel {
 	        for (int i = 0; i < 4; i++) {
 	            for (int j = 0; j < 4; j++) {
 	                int valor = gameBoard.getBoardValue(i, j);
-	                buttons[i][j].setText(valor == 0 ? "" : String.valueOf(valor));
+	                if (valor == 0) {
+	                    buttons[i][j].setText("");  // Espacio vacío, sin texto
+	                    buttons[i][j].setBackground(new Color(204, 204, 204));  // Color del botón vacío
+	                } else {
+	                    buttons[i][j].setText(String.valueOf(valor));  // numero boton
+	                    buttons[i][j].setBackground(null);  // Color demas botones
+	                    buttons[i][j].setForeground(new Color(255, 153, 0));
+	                    
+	                }
 	            }
 	        }
 
@@ -118,9 +142,11 @@ public class VentanaJuego extends JPanel {
 	        
 	    }
 	    
+	    
+	    //Se asegura que se mantenga el foco en esta ventana para lo que es el manejo de teclas y actualizartablero
 	    public void addNotify() {
 	        super.addNotify();
-	        requestFocusInWindow();  // Asegura que el foco está en esta ventana
+	        requestFocusInWindow();  
 	    }
 
 
