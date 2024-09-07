@@ -1,4 +1,4 @@
-package interfaz;
+package tp1_p3_2024_2.interfaz;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,15 +15,13 @@ public class VentanaMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private MainFrame mainFrame;
 
-	public VentanaMenu(MainFrame mainFrame) 
-	{
+	public VentanaMenu(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		MenuPrincipal();
 
 	}
 
-	public void MenuPrincipal() 
-	{
+	public void MenuPrincipal() {
 		removeAll();
 		repaint();
 		setName("Rompecabezas Deslizante");
@@ -48,7 +46,7 @@ public class VentanaMenu extends JPanel {
 
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.cambiarVentana(MainFrame.VENTANAJUEGO);
+				mainFrame.cambiarVentana(MainFrame.S_VENTANAJUEGO);
 
 			}
 		});
@@ -60,7 +58,7 @@ public class VentanaMenu extends JPanel {
 		panel.add(btnOpciones);
 		btnOpciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.cambiarVentana(MainFrame.VENTANAOPCIONES);
+				mainFrame.cambiarVentana(MainFrame.S_VENTANAOPCIONES);
 
 			}
 		});
