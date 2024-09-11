@@ -8,7 +8,7 @@ public class GameBoard {
 	private int blankX;
 	private int blankY;
 
-	public GameBoard(int s) {
+	public GameBoard(int s, int diff) {
 		this.size = s;
 		this.board = new int[s][s];
 
@@ -28,9 +28,7 @@ public class GameBoard {
 				}
 			}
 		}
-		// TODO: hacer variable esto
-		this.randomize(20); // aca podemos agregar como dijo Ema mayor dificultad y mayor cantidad de random
-
+		this.randomize((int) (Math.pow(s, 2) * Math.pow(2,diff)));
 	}
 
 	// true si movio ok, false si no se pudo mover
@@ -69,7 +67,7 @@ public class GameBoard {
 	// TODO: esta funcion no va a servir si se quiere ver como se randomiza todo en
 	// vivo
 	// desde la interfaz
-	public void randomize(int c) {
+	private void randomize(int c) {
 		Random r = new Random();
 		while (c > 0) {
 			Direction randomDir = Direction.values()[r.nextInt(4)];

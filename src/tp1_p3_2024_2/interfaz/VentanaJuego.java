@@ -29,10 +29,10 @@ public class VentanaJuego extends JPanel {
 	private Score gameScore;
 	private int size;
 
-	public VentanaJuego(MainFrame mainFrame) {
+	public VentanaJuego(MainFrame mainFrame, int opt_size, int opt_diff) {
 		this.mainFrame = mainFrame;
-		this.size = 4; // TODO: hacer esto variable
-		this.gameBoard = new GameBoard(this.size);
+		this.size = opt_size;
+		this.gameBoard = new GameBoard(opt_size, opt_diff);
 		this.gameScore = new Score(0); // TODO: meter aca el best score como input
 		iniciarJuego();
 

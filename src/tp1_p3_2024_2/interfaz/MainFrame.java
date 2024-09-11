@@ -22,6 +22,9 @@ public class MainFrame extends JFrame {
 	private VentanaOpciones ventanaOpciones;
 	private VentanaJuego ventanaJuego;
 	private CardLayout cardLayout;
+	
+	private int boardSize;
+	private int difficulty;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,17 +43,19 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(new CardLayout(0, 0));
-		cardLayout = new CardLayout();
+		this.cardLayout = new CardLayout();
 		getContentPane().setLayout(cardLayout);
 
-		ventanaMenu = new VentanaMenu(this);
-		ventanaOpciones = new VentanaOpciones(this);
+		this.ventanaMenu = new VentanaMenu(this);
+		this.ventanaOpciones = new VentanaOpciones(this);
 
 		// añade ventanas al contenedor
-
 		getContentPane().add(ventanaMenu, S_VENTANAMENU);
 		getContentPane().add(ventanaOpciones, S_VENTANAOPCIONES);
 
+		this.boardSize = 4;  // tamaños propuestos: 3 o mayores
+		this.difficulty = 2; // dificultades propuestas = 1, 2 o 3 (facil/normal/dificil, respectivamente)
+		
 		revalidate();
 		repaint();
 
@@ -59,7 +64,7 @@ public class MainFrame extends JFrame {
 	public void cambiarVentana(String ventana) {
 		if (ventana.equals(S_VENTANAJUEGO)) {
 			agregarMenuJuego();
-			ventanaJuego = new VentanaJuego(this);
+			ventanaJuego = new VentanaJuego(this, this.boardSize, this.difficulty);
 			getContentPane().add(ventanaJuego, S_VENTANAJUEGO);
 			revalidate();
 			repaint();
@@ -104,6 +109,15 @@ public class MainFrame extends JFrame {
 
 		JMenu opcionAyuda = new JMenu("Ayuda");
 		menuBar.add(opcionAyuda);
+	}
+	
+	// TODO: llamar a estos desde ventanaOpciones
+	public void setDifficulty(int d) {
+		this.difficulty = d;
+	}
+	
+	public void setBoardSize(int s) {
+		this.boardSize = s;
 	}
 
 }
