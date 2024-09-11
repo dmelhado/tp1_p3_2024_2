@@ -8,8 +8,6 @@ public class GameBoard {
 	private int blankX;
 	private int blankY;
 
-	Score gameScore = new Score(0);
-
 	public GameBoard(int s) {
 		this.size = s;
 		this.board = new int[s][s];
@@ -32,7 +30,6 @@ public class GameBoard {
 		}
 		// TODO: hacer variable esto
 		this.randomize(20); // aca podemos agregar como dijo Ema mayor dificultad y mayor cantidad de random
-		gameScore.setRandomScore(true);
 
 	}
 
@@ -65,9 +62,7 @@ public class GameBoard {
 		this.board[nextX][nextY] = 0;
 		this.blankX = nextX;
 		this.blankY = nextY;
-		if (gameScore.getRandomScore() == true) {
-			gameScore.addPoints();
-		}
+
 		return true;
 	}
 
@@ -121,15 +116,8 @@ public class GameBoard {
 		return blankY;
 	}
 
-	public Score getGameScore() {
-		return gameScore;
-	}
-
 	// Meter setters a lo loco es mala idea (rompe encapsulamiento)
 	// Por ahora los dejo aca abajo, pero creo que hay que evitarlos
-	public void setGameScore(Score gameScore) {
-		this.gameScore = gameScore;
-	}
 
 	public void setSize(int size) {
 		this.size = size;

@@ -15,25 +15,29 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import tp1_p3_2024_2.GameBoard;
+import tp1_p3_2024_2.Score;
 import tp1_p3_2024_2.Direction;
 
 public class VentanaJuego extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private MainFrame mainFrame;
-	private GameBoard gameBoard;
 	private JButton[][] buttons;
 	private JLabel scoreLabel;
 
+	private GameBoard gameBoard;
+	private Score gameScore;
 	private int size;
 
 	public VentanaJuego(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		this.size = 4;
-		gameBoard = new GameBoard(this.size);
+		this.size = 4; // TODO: hacer esto variable
+		this.gameBoard = new GameBoard(this.size);
+		this.gameScore = new Score(0); // TODO: meter aca el best score como input
 		iniciarJuego();
 
 		addKeyListener(new KeyAdapter() {
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				Direction dir = null;
@@ -128,6 +132,8 @@ public class VentanaJuego extends JPanel {
 
 	private void actualizarTablero() {
 
+		this.gameScore.addPoints();
+
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
 				int valor = gameBoard.getBoardValue(i, j);
@@ -143,11 +149,11 @@ public class VentanaJuego extends JPanel {
 			}
 		}
 
-		scoreLabel.setText("Puntaje: " + gameBoard.getGameScore().getScore());
+		scoreLabel.setText("Puntaje: " + this.gameScore.getScore());
 
 		if (gameBoard.checkWinState()) {
 			JOptionPane.showMessageDialog(this,
-					"¡Felicidades! Has ganado el juego con un puntaje de " + gameBoard.getGameScore().getScore() + ".",
+					"¡Felicidades! Has ganado el juego con un puntaje de " + this.gameScore.getScore() + ".",
 					"Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
 			mainFrame.cambiarVentana(MainFrame.S_VENTANAMENU);
 		}
