@@ -14,6 +14,9 @@ public class VentanaMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private MainFrame mainFrame;
+	
+	// usado para ensanchar los paneles
+	private String fillString = "                                               ";
 
 	public VentanaMenu(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
@@ -34,15 +37,13 @@ public class VentanaMenu extends JPanel {
 		lblTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 34));
 		add(lblTitulo, BorderLayout.NORTH);
 
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
-
-		JLabel label_1 = new JLabel("");
-		panel.add(label_1);
+		JPanel mid_panel = new JPanel();
+		add(mid_panel, BorderLayout.CENTER);
+		mid_panel.setLayout(new GridLayout(0, 1, 0, 0));
+		mid_panel.add(new JLabel(""));
 
 		JButton btnIniciar = new JButton("INICIAR");
-		panel.add(btnIniciar);
+		mid_panel.add(btnIniciar);
 
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -51,47 +52,38 @@ public class VentanaMenu extends JPanel {
 			}
 		});
 
-		JLabel label_11 = new JLabel("");
-		panel.add(label_11);
+		mid_panel.add(new JLabel(""));
 
 		JButton btnOpciones = new JButton("OPCIONES");
-		panel.add(btnOpciones);
+		mid_panel.add(btnOpciones);
 		btnOpciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.cambiarVentana(MainFrame.S_VENTANAOPCIONES);
 
 			}
 		});
-
-		JLabel label_15 = new JLabel("");
-		panel.add(label_15);
+		mid_panel.add(new JLabel(""));
 
 		JButton btnSalir = new JButton("SALIR");
-		panel.add(btnSalir);
+		mid_panel.add(btnSalir);
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salirDelJuego();
 			}
 		});
 
-		JPanel panel_1 = new JPanel();
-		add(panel_1, BorderLayout.SOUTH);
-		panel_1.setLayout(new GridLayout(5, 1, 0, 0));
+		JPanel bottom_panel = new JPanel();
+		add(bottom_panel, BorderLayout.SOUTH);
+		bottom_panel.setLayout(new GridLayout(5, 1, 0, 0));
+		bottom_panel.add(new JLabel(this.fillString));
 
-		JLabel label = new JLabel("                        ");
-		panel_1.add(label);
+		JPanel left_panel = new JPanel();
+		add(left_panel, BorderLayout.WEST);
+		left_panel.add(new JLabel(this.fillString));
 
-		JPanel panel_2 = new JPanel();
-		add(panel_2, BorderLayout.WEST);
-
-		JLabel lblNewLabel = new JLabel("                                               ");
-		panel_2.add(lblNewLabel);
-
-		JPanel panel_3 = new JPanel();
-		add(panel_3, BorderLayout.EAST);
-
-		JLabel lblNewLabel_1 = new JLabel("                                                        ");
-		panel_3.add(lblNewLabel_1);
+		JPanel right_panel = new JPanel();
+		add(right_panel, BorderLayout.EAST);
+		right_panel.add(new JLabel(this.fillString));
 
 	}
 
