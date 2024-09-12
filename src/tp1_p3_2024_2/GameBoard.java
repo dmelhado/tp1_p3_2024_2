@@ -1,5 +1,4 @@
 package tp1_p3_2024_2;
-
 import java.util.Random;
 
 public class GameBoard {
