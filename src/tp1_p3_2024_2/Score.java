@@ -8,16 +8,16 @@ public class Score {
 
 	// Constructor
 	public Score(int bestScore) {
-		this.score = 0;
+		this.score = -1;
 		this.bestScore = bestScore;
 	}
 
 	public void addPoints() {
-		this.score += 1;
+		this.score += 1; 
 	}
-
+ 
 	public void resetScore() {
-		this.score = 0;
+		this.score = -1;
 	}
 
 	// deberia llamarlo cuando termine la partida para comparar, no lo puedo llamar
