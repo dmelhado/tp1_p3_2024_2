@@ -22,16 +22,16 @@ public class VentanaOpciones extends JPanel {
 
     public void iniciarOpciones() {
         removeAll();
-
+ 
         setSize(640, 480);
         setLayout(null);
 
-        JLabel lblOpciones = new JLabel("Estas en opciones");
+        JLabel lblOpciones = new JLabel("Elegir dificultad");
         lblOpciones.setFont(new Font("Arial", Font.PLAIN, 24));
         lblOpciones.setBounds(220, 150, 200, 30);
         add(lblOpciones);
 
-        JButton btn3x3 = new JButton("3x3");
+        JButton btn3x3 = new JButton("Fácil");
         btn3x3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setBoardSize(3);
@@ -40,7 +40,7 @@ public class VentanaOpciones extends JPanel {
         btn3x3.setBounds(222, 185, 154, 43); 
         add(btn3x3);
 
-        JButton btn4x4 = new JButton("4x4");
+        JButton btn4x4 = new JButton("Normal");
         btn4x4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setBoardSize(4);
@@ -49,7 +49,7 @@ public class VentanaOpciones extends JPanel {
         btn4x4.setBounds(222, 235, 154, 43); 
         add(btn4x4);
 
-        JButton btn5x5 = new JButton("5x5");
+        JButton btn5x5 = new JButton("Difícil");
         btn5x5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setBoardSize(5);
