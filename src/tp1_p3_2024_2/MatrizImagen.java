@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-/*
+
 public class MatrizImagen {
     private BufferedImage originalImage;
     private BufferedImage[][] imageParts;
@@ -39,5 +39,4 @@ public class MatrizImagen {
     }
 }
 
-NO PUDE ADAPTAR LA IMAGEN A LA MATRIZ TODAVIA, LA DIVIDE PERO NO LA MUESTRA CORRECTAMENTE.
-*/
+// NO PUDE ADAPTAR LA IMAGEN A LA MATRIZ TODAVIA, LA DIVIDE PERO NO LA MUESTRA CORRECTAMENTE.

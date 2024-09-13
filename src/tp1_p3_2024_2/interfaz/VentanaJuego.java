@@ -8,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,9 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import tp1_p3_2024_2.GameBoard;
+import tp1_p3_2024_2.MatrizImagen;
 import tp1_p3_2024_2.Score;
 import tp1_p3_2024_2.Direction;
-/*import tp1_p3_2024_2.MatrizImagen;*/
 
 public class VentanaJuego extends JPanel {
 
@@ -32,6 +34,8 @@ public class VentanaJuego extends JPanel {
 	private Score gameScore;
 	private int size;
 
+	private ImageIcon[] icons;
+	
 	public VentanaJuego(MainFrame mainFrame, int opt_size, int opt_diff) {
 		this.mainFrame = mainFrame;
 		this.size = opt_size;
@@ -112,11 +116,12 @@ public class VentanaJuego extends JPanel {
 		JPanel RightPanel = new JPanel();
 		add(RightPanel, BorderLayout.EAST);
 		
-/*		 MatrizImagen imageDivider = new MatrizImagen("docs/pixelart.jpg");
+		 MatrizImagen imageDivider = new MatrizImagen("docs/pixelart.jpg");
 		    imageDivider.divideImagen(this.size, this.size);
 		    BufferedImage[][] imageParts = imageDivider.getImageParts();
-*/
+
 		buttons = new JButton[this.size][this.size];
+		icons = new ImageIcon[this.size * this.size];
 
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
@@ -126,7 +131,12 @@ public class VentanaJuego extends JPanel {
                 button.setBackground(new Color(255, 255, 255));
                 button.setFont(new Font("Lucida Fax", Font.BOLD, 25));
                 button.addActionListener(new ButtonClickListener(i, j));
+                
+                // horrible esta solucion
+                icons[j * this.size + i] = new ImageIcon(imageParts[i][j]);
+                
                 gamePanel.add(button);
+              
 		}
             }
 
@@ -146,15 +156,18 @@ public class VentanaJuego extends JPanel {
 	            for (int j = 0; j < this.size; j++) {
 	                int valor = gameBoard.getBoardValue(i, j);
 	                if (valor == 0) {
+	                	buttons[i][j].setIcon(null);
 	                    buttons[i][j].setText(""); // Espacio vacío, sin texto
-	                    buttons[i][j].setBackground(new Color(204, 204, 204)); // Color del botón vacío
+	                    buttons[i][j].setBackground(new Color(204, 204, 204)); // Color del botón vacío  
 	                } else {
-	                    buttons[i][j].setText(String.valueOf(valor)); // numero boton
-	                    buttons[i][j].setBackground(null); // Color demas botones
-	                    buttons[i][j].setForeground(new Color(255, 153, 0));
-	                    buttons[i][j].setFont(new Font("Lucida Fax", Font.BOLD, 30)); // Cambiar el tamaño de la fuente
-	                    buttons[i][j].setForeground(Color.WHITE); // Cambiar el color del texto
-	                    buttons[i][j].setBackground(new Color(70, 130, 180)); // Cambiar el color de fondo
+	                	buttons[i][j].setIcon(icons[valor - 1]);
+	                    //buttons[i][j].setText(String.valueOf(valor)); // numero boton
+	                    //buttons[i][j].setBackground(null); // Color demas botones
+	                    //buttons[i][j].setForeground(new Color(255, 153, 0));
+	                    //buttons[i][j].setFont(new Font("Lucida Fax", Font.BOLD, 30)); // Cambiar el tamaño de la fuente
+	                    //buttons[i][j].setForeground(Color.WHITE); // Cambiar el color del texto
+	                    //buttons[i][j].setBackground(new Color(70, 130, 180)); // Cambiar el color de fondo
+	                    
 	                }
 			}
 		}
