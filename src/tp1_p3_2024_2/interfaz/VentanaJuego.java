@@ -94,7 +94,7 @@ public class VentanaJuego extends JPanel {
 		topPanel.add(lblTitulo);
 
 		// Panel central para el tablero
-		  JPanel gamePanel = new JPanel(new GridLayout(this.size, this.size));
+		  JPanel gamePanel = new JPanel(new GridLayout(this.size+1, this.size+1));
 	        gamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Agregar espaciado entre los botones
 	        add(gamePanel, BorderLayout.CENTER);
 	        

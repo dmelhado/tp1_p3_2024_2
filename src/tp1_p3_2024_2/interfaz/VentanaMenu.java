@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+
+import tp1_p3_2024_2.Fuente;
+
 import java.awt.GridLayout;
 
 public class VentanaMenu extends JPanel {
@@ -25,6 +28,10 @@ public class VentanaMenu extends JPanel {
 	}
 
 	public void MenuPrincipal() {
+		// se carga fuente, hay que cambiar con fuentePersonalizada.deriveFont(tamañof)
+		Font fuentePersonalizada = Fuente.cargarFuente("fonts/upheavtt.ttf");
+		
+		
 		removeAll();
 		repaint();
 		setName("Rompecabezas Deslizante");
