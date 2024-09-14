@@ -20,6 +20,7 @@ import tp1_p3_2024_2.GameBoard;
 import tp1_p3_2024_2.Score;
 import tp1_p3_2024_2.Direction;
 /*import tp1_p3_2024_2.MatrizImagen;*/
+import tp1_p3_2024_2.Fuente;
 
 public class VentanaJuego extends JPanel {
 
@@ -27,6 +28,7 @@ public class VentanaJuego extends JPanel {
 	private MainFrame mainFrame;
 	private JButton[][] buttons;
 	private JLabel scoreLabel;
+	
 
 	private GameBoard gameBoard;
 	private Score gameScore;
@@ -90,11 +92,11 @@ public class VentanaJuego extends JPanel {
 
 		JLabel lblTitulo = new JLabel("Rompecabezas Deslizante");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Comic Sans MS", Font.BOLD, 34));
+		lblTitulo.setFont(mainFrame.fuentePersonalizada().deriveFont(40f));
 		topPanel.add(lblTitulo);
 
 		// Panel central para el tablero
-		  JPanel gamePanel = new JPanel(new GridLayout(this.size+1, this.size+1));
+		  JPanel gamePanel = new JPanel(new GridLayout(this.size+1, this.size+1)); //agrego +1 para poder ver el tablero en el design, sino no deja ya que gridLayout no puede inicializar en 0,0
 	        gamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Agregar espaciado entre los botones
 	        add(gamePanel, BorderLayout.CENTER);
 	        
@@ -104,7 +106,7 @@ public class VentanaJuego extends JPanel {
 		scoreLabel = new JLabel("Puntaje: 0");
 		botPanel.add(scoreLabel);
 		scoreLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		scoreLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+		scoreLabel.setFont(mainFrame.fuentePersonalizada().deriveFont(26f));
 
 		JPanel leftPanel = new JPanel();
 		add(leftPanel, BorderLayout.WEST);
@@ -124,7 +126,7 @@ public class VentanaJuego extends JPanel {
                 buttons[i][j] = button;
 
                 button.setBackground(new Color(255, 255, 255));
-                button.setFont(new Font("Lucida Fax", Font.BOLD, 25));
+                button.setFont(mainFrame.fuentePersonalizada().deriveFont(25f));
                 button.addActionListener(new ButtonClickListener(i, j));
                 gamePanel.add(button);
 		}
@@ -152,7 +154,7 @@ public class VentanaJuego extends JPanel {
 	                    buttons[i][j].setText(String.valueOf(valor)); // numero boton
 	                    buttons[i][j].setBackground(null); // Color demas botones
 	                    buttons[i][j].setForeground(new Color(255, 153, 0));
-	                    buttons[i][j].setFont(new Font("Lucida Fax", Font.BOLD, 30)); // Cambiar el tamaño de la fuente
+	                    buttons[i][j].setFont(mainFrame.fuentePersonalizada().deriveFont(30f)); // Cambiar el tamaño de la fuente
 	                    buttons[i][j].setForeground(Color.WHITE); // Cambiar el color del texto
 	                    buttons[i][j].setBackground(new Color(70, 130, 180)); // Cambiar el color de fondo
 	                }

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Fuente {
+	
 	public static Font cargarFuente(String rutaFuente) {
 		try {
 			File archivoFuente = new File(rutaFuente);

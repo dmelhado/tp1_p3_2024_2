@@ -8,12 +8,21 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
+
+import tp1_p3_2024_2.Fuente;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Dimension;
 
 
 public class VentanaOpciones extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private MainFrame mainFrame;
+    
 
     public VentanaOpciones(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -22,58 +31,119 @@ public class VentanaOpciones extends JPanel {
 
     public void iniciarOpciones() {
         removeAll();
- 
+
         setSize(640, 480);
-        setLayout(null);
+        setLayout(new BorderLayout(0, 0));
 
-        JLabel lblOpciones = new JLabel("Elegir dificultad");
-        lblOpciones.setFont(new Font("Arial", Font.PLAIN, 24));
-        lblOpciones.setBounds(220, 150, 200, 30);
-        add(lblOpciones);
+        JPanel midPanel = new JPanel();
+        add(midPanel, BorderLayout.CENTER);
 
-        JButton btn3x3 = new JButton("Fácil");
-        btn3x3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.setBoardSize(3);
-            }
-        });
-        btn3x3.setBounds(222, 185, 154, 43); 
-        add(btn3x3);
+        JPanel topPanel = new JPanel();
+        add(topPanel, BorderLayout.NORTH);
 
-        JButton btn4x4 = new JButton("Normal");
-        btn4x4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.setBoardSize(4);
-            }
-        });
-        btn4x4.setBounds(222, 235, 154, 43); 
-        add(btn4x4);
+        JPanel bottomPanel = new JPanel();
+        add(bottomPanel, BorderLayout.SOUTH);
 
-        JButton btn5x5 = new JButton("Difícil");
-        btn5x5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.setBoardSize(5);
-            }
-        });
-        btn5x5.setBounds(222, 285, 154, 43);
-        add(btn5x5);
+        JPanel westPanel = new JPanel();
+        westPanel.setPreferredSize(new Dimension(80, 0));
+        add(westPanel, BorderLayout.WEST);
 
-        JButton btnConfirmar = new JButton("Confirmar");
+        JPanel eastPanel = new JPanel();
+        eastPanel.setPreferredSize(new Dimension(80, 0));
+        add(eastPanel, BorderLayout.EAST);
+        
+        JPanel tituloDificultadPanel = new JPanel();
+        tituloDificultadPanel.setPreferredSize(new Dimension(20, 50));
+        tituloDificultadPanel.setLayout(new GridLayout(1, 3));
+        
+        JPanel tildesPanel = new JPanel();
+        tildesPanel.setLayout(new GridLayout(1, 3));
+        midPanel.add(tildesPanel);
+        
+
+        JButton btnConfirmar = new JButton("Volver al Menú");
+        btnConfirmar.setPreferredSize(new Dimension(200, 50));
+        btnConfirmar.setFont(mainFrame.fuentePersonalizada().deriveFont(12f));
         btnConfirmar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.cambiarVentana(MainFrame.S_VENTANAMENU);
             }
         });
-        btnConfirmar.setBounds(222, 335, 154, 43);
-        add(btnConfirmar);
+        bottomPanel.add(btnConfirmar);
 
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.addActionListener(new ActionListener() {
+     
+        midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
+
+        midPanel.add(tituloDificultadPanel);
+
+        
+        JCheckBox checkFacil = new JCheckBox("Fácil");
+        tituloDificultadPanel.add(checkFacil);
+        checkFacil.setHorizontalAlignment(SwingConstants.CENTER);
+        checkFacil.setFont(mainFrame.fuentePersonalizada().deriveFont(16f));
+        
+        JCheckBox checkNormal = new JCheckBox("Normal");
+        tituloDificultadPanel.add(checkNormal);
+        checkNormal.setSelected(true);
+        checkNormal.setHorizontalAlignment(SwingConstants.CENTER);
+        checkNormal.setFont(mainFrame.fuentePersonalizada().deriveFont(16f));
+        
+        JCheckBox checkDificil = new JCheckBox("Difícil");
+        tituloDificultadPanel.add(checkDificil);
+        checkDificil.setHorizontalAlignment(SwingConstants.CENTER);
+        checkDificil.setFont(mainFrame.fuentePersonalizada().deriveFont(16f));
+        
+        JLabel lblOpciones = new JLabel("DIFICULTAD");
+        tildesPanel.add(lblOpciones);
+        lblOpciones.setHorizontalAlignment(SwingConstants.CENTER);
+        lblOpciones.setVerticalAlignment(SwingConstants.BOTTOM);
+        lblOpciones.setFont(mainFrame.fuentePersonalizada().deriveFont(28f));
+
+        
+        
+        checkDificil.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              if (checkDificil.isSelected()) {
+              	 checkNormal.setSelected(false);
+              	 checkFacil.setSelected(false);
+              	 mainFrame.setBoardSize(5);
+              
+          }
+          }
+        });
+        
+        checkNormal.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.cambiarVentana(MainFrame.S_VENTANAMENU);
+                if (checkNormal.isSelected()) {
+                	 checkFacil.setSelected(false);
+                	 checkDificil.setSelected(false);
+                	 mainFrame.setBoardSize(4);
+                
+            }
             }
         });
-        btnVolver.setBounds(222, 385, 154, 43); 
+        
+        
+        checkFacil.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (checkFacil.isSelected()) {
+                	 checkNormal.setSelected(false);
+                	 checkDificil.setSelected(false);
+                	 mainFrame.setBoardSize(3);
+                
+            }
+            }
+        });
+        
+              
+       
+        // Aca se puede agregar boton reglas o dejarlo asi
+        JPanel emptyPanel = new JPanel();
+        
+        midPanel.add(emptyPanel);
 
         revalidate();
         repaint();

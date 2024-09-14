@@ -1,10 +1,14 @@
 package tp1_p3_2024_2.interfaz;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import tp1_p3_2024_2.Fuente;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -119,5 +123,12 @@ public class MainFrame extends JFrame {
 	public void setBoardSize(int s) {
 		this.boardSize = s;
 	}
+	
+	public Font fuentePersonalizada()
+	{
+		Font fuentePersonalizada = Fuente.cargarFuente("fonts/upheavtt.ttf");
+		return fuentePersonalizada;
+	}
+	}
 
-}
+
