@@ -115,7 +115,6 @@ public class MainFrame extends JFrame {
 		menuBar.add(opcionAyuda);
 	}
 
-	// TODO: llamar a estos desde ventanaOpciones
 	public void setDifficulty(int d) {
 		this.difficulty = d;
 	}
