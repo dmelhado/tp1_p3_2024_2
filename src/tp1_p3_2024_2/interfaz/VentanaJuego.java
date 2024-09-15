@@ -28,7 +28,6 @@ public class VentanaJuego extends JPanel {
 	private MainFrame mainFrame;
 	private JButton[][] buttons;
 	private JLabel scoreLabel;
-	
 
 	private GameBoard gameBoard;
 	private Score gameScore;
@@ -96,10 +95,13 @@ public class VentanaJuego extends JPanel {
 		topPanel.add(lblTitulo);
 
 		// Panel central para el tablero
-		  JPanel gamePanel = new JPanel(new GridLayout(this.size+1, this.size+1)); //agrego +1 para poder ver el tablero en el design, sino no deja ya que gridLayout no puede inicializar en 0,0
-	        gamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Agregar espaciado entre los botones
-	        add(gamePanel, BorderLayout.CENTER);
-	        
+		JPanel gamePanel = new JPanel(new GridLayout(this.size + 1, this.size + 1)); // agrego +1 para poder ver el
+																						// tablero en el design, sino no
+																						// deja ya que gridLayout no
+																						// puede inicializar en 0,0
+		gamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Agregar espaciado entre los botones
+		add(gamePanel, BorderLayout.CENTER);
+
 		JPanel botPanel = new JPanel();
 		add(botPanel, BorderLayout.SOUTH);
 
@@ -113,24 +115,25 @@ public class VentanaJuego extends JPanel {
 
 		JPanel RightPanel = new JPanel();
 		add(RightPanel, BorderLayout.EAST);
-		
-/*		 MatrizImagen imageDivider = new MatrizImagen("docs/pixelart.jpg");
-		    imageDivider.divideImagen(this.size, this.size);
-		    BufferedImage[][] imageParts = imageDivider.getImageParts();
-*/
+
+		/*
+		 * MatrizImagen imageDivider = new MatrizImagen("docs/pixelart.jpg");
+		 * imageDivider.divideImagen(this.size, this.size); BufferedImage[][] imageParts
+		 * = imageDivider.getImageParts();
+		 */
 		buttons = new JButton[this.size][this.size];
 
-        for (int i = 0; i < this.size; i++) {
-            for (int j = 0; j < this.size; j++) {
-                JButton button = new JButton();
-                buttons[i][j] = button;
+		for (int i = 0; i < this.size; i++) {
+			for (int j = 0; j < this.size; j++) {
+				JButton button = new JButton();
+				buttons[i][j] = button;
 
-                button.setBackground(new Color(255, 255, 255));
-                button.setFont(mainFrame.fuentePersonalizada().deriveFont(25f));
-                button.addActionListener(new ButtonClickListener(i, j));
-                gamePanel.add(button);
+				button.setBackground(new Color(255, 255, 255));
+				button.setFont(mainFrame.fuentePersonalizada().deriveFont(25f));
+				button.addActionListener(new ButtonClickListener(i, j));
+				gamePanel.add(button);
+			}
 		}
-            }
 
 		actualizarTablero();
 
@@ -144,20 +147,21 @@ public class VentanaJuego extends JPanel {
 
 		this.gameScore.addPoints();
 
-	     for (int i = 0; i < this.size; i++) {
-	            for (int j = 0; j < this.size; j++) {
-	                int valor = gameBoard.getBoardValue(i, j);
-	                if (valor == 0) {
-	                    buttons[i][j].setText(""); // Espacio vacío, sin texto
-	                    buttons[i][j].setBackground(new Color(204, 204, 204)); // Color del botón vacío
-	                } else {
-	                    buttons[i][j].setText(String.valueOf(valor)); // numero boton
-	                    buttons[i][j].setBackground(null); // Color demas botones
-	                    buttons[i][j].setForeground(new Color(255, 153, 0));
-	                    buttons[i][j].setFont(mainFrame.fuentePersonalizada().deriveFont(30f)); // Cambiar el tamaño de la fuente
-	                    buttons[i][j].setForeground(Color.WHITE); // Cambiar el color del texto
-	                    buttons[i][j].setBackground(new Color(70, 130, 180)); // Cambiar el color de fondo
-	                }
+		for (int i = 0; i < this.size; i++) {
+			for (int j = 0; j < this.size; j++) {
+				int valor = gameBoard.getBoardValue(i, j);
+				if (valor == 0) {
+					buttons[i][j].setText(""); // Espacio vacío, sin texto
+					buttons[i][j].setBackground(new Color(204, 204, 204)); // Color del botón vacío
+				} else {
+					buttons[i][j].setText(String.valueOf(valor)); // numero boton
+					buttons[i][j].setBackground(null); // Color demas botones
+					buttons[i][j].setForeground(new Color(255, 153, 0));
+					buttons[i][j].setFont(mainFrame.fuentePersonalizada().deriveFont(30f)); // Cambiar el tamaño de la
+																							// fuente
+					buttons[i][j].setForeground(Color.WHITE); // Cambiar el color del texto
+					buttons[i][j].setBackground(new Color(70, 130, 180)); // Cambiar el color de fondo
+				}
 			}
 		}
 

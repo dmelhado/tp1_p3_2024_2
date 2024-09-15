@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
 	private VentanaOpciones ventanaOpciones;
 	private VentanaJuego ventanaJuego;
 	private CardLayout cardLayout;
-	
+
 	private int boardSize;
 	private int difficulty;
 
@@ -57,9 +57,9 @@ public class MainFrame extends JFrame {
 		getContentPane().add(ventanaMenu, S_VENTANAMENU);
 		getContentPane().add(ventanaOpciones, S_VENTANAOPCIONES);
 
-		this.boardSize = 4;  // tamaños propuestos: 3 o mayores
+		this.boardSize = 4; // tamaños propuestos: 3 o mayores
 		this.difficulty = 2; // dificultades propuestas = 1, 2 o 3 (facil/normal/dificil, respectivamente)
-		
+
 		revalidate();
 		repaint();
 
@@ -114,21 +114,18 @@ public class MainFrame extends JFrame {
 		JMenu opcionAyuda = new JMenu("Ayuda");
 		menuBar.add(opcionAyuda);
 	}
-	
+
 	// TODO: llamar a estos desde ventanaOpciones
 	public void setDifficulty(int d) {
 		this.difficulty = d;
 	}
-	
+
 	public void setBoardSize(int s) {
 		this.boardSize = s;
 	}
-	
-	public Font fuentePersonalizada()
-	{
+
+	public Font fuentePersonalizada() {
 		Font fuentePersonalizada = Fuente.cargarFuente("fonts/upheavtt.ttf");
 		return fuentePersonalizada;
 	}
-	}
-
-
+}

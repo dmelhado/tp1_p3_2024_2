@@ -13,9 +13,9 @@ public class Score {
 	}
 
 	public void addPoints() {
-		this.score += 1; 
+		this.score += 1;
 	}
- 
+
 	public void resetScore() {
 		this.score = -1;
 	}

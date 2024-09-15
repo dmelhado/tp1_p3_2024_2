@@ -6,12 +6,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class Fuente {
-	
+
 	public static Font cargarFuente(String rutaFuente) {
 		try {
 			File archivoFuente = new File(rutaFuente);
 			return Font.createFont(Font.TRUETYPE_FONT, archivoFuente);
-			
+
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 			return null;

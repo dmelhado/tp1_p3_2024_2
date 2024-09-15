@@ -1,4 +1,5 @@
 package tp1_p3_2024_2;
+
 import java.util.Random;
 
 public class GameBoard {
@@ -27,7 +28,7 @@ public class GameBoard {
 				}
 			}
 		}
-		this.randomize((int) (Math.pow(s, 2) * Math.pow(2,diff)));
+		this.randomize((int) (Math.pow(s, 2) * Math.pow(2, diff)));
 	}
 
 	// true si movio ok, false si no se pudo mover

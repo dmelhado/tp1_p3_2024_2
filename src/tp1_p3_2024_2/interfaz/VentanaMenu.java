@@ -22,7 +22,6 @@ public class VentanaMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private MainFrame mainFrame;
-	
 
 	public VentanaMenu(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
@@ -31,44 +30,40 @@ public class VentanaMenu extends JPanel {
 	}
 
 	public void MenuPrincipal() {
-		
+
 		removeAll();
 		repaint();
 		setName("Rompecabezas Deslizante");
 		setBounds(100, 100, 640, 480);
 		setLayout(new BorderLayout(0, 0));
 
-		
 		JPanel topPanel = new JPanel();
 		add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel mid_panel = new JPanel();
 		add(mid_panel, BorderLayout.CENTER);
 		mid_panel.setLayout(new GridLayout(0, 1, 0, 0));
 		mid_panel.add(new JLabel(""));
-		
+
 		JPanel bottom_panel = new JPanel();
 		add(bottom_panel, BorderLayout.SOUTH);
 		bottom_panel.setPreferredSize(new Dimension(190, 80));
 		bottom_panel.setLayout(new GridLayout(5, 1, 0, 0));
-		
 
 		JPanel left_panel = new JPanel();
 		add(left_panel, BorderLayout.WEST);
 		left_panel.setPreferredSize(new Dimension(190, 0));
-		
 
 		JPanel right_panel = new JPanel();
 		add(right_panel, BorderLayout.EAST);
 		right_panel.setPreferredSize(new Dimension(200, 0));
-		
 
 		JButton btnIniciar = new JButton("INICIAR");
 		btnIniciar.setBackground(SystemColor.activeCaption);
 		mid_panel.add(btnIniciar);
 		btnIniciar.setFont(mainFrame.fuentePersonalizada().deriveFont(25f));
-		
+
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.cambiarVentana(MainFrame.S_VENTANAJUEGO);
@@ -96,20 +91,16 @@ public class VentanaMenu extends JPanel {
 		btnSalir.setFont(mainFrame.fuentePersonalizada().deriveFont(25f));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				salirDelJuego();
 			}
 		});
 
-		
 		JLabel lblTitulo = new JLabel("Rompecabezas Deslizante");
 		topPanel.add(lblTitulo, BorderLayout.CENTER);
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setVerticalAlignment(SwingConstants.TOP);
 		lblTitulo.setFont(mainFrame.fuentePersonalizada().deriveFont(40f));
-		
-		
-		
 
 	}
 
