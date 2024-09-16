@@ -1,20 +1,15 @@
 
 package tp1_p3_2024_2.interfaz;
 
-import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
-
-import tp1_p3_2024_2.Fuente;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;

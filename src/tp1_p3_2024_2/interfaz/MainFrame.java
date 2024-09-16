@@ -44,6 +44,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame() {
+		setTitle("Rompecabezas Deslizante"); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(new CardLayout(0, 0));
@@ -59,7 +60,7 @@ public class MainFrame extends JFrame {
 
 		this.boardSize = 4; // tamaños propuestos: 3 o mayores
 		this.difficulty = 2; // dificultades propuestas = 1, 2 o 3 (facil/normal/dificil, respectivamente)
-
+		
 		revalidate();
 		repaint();
 
@@ -113,7 +114,27 @@ public class MainFrame extends JFrame {
 
 		JMenu opcionAyuda = new JMenu("Ayuda");
 		menuBar.add(opcionAyuda);
-	}
+		
+		JMenuItem reglas = new JMenuItem("Cómo jugar");
+		opcionAyuda.add(reglas);
+		reglas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		            VentanaReglas dialog = new VentanaReglas(MainFrame.this);
+		            dialog.setVisible(true);
+			}
+		});
+		JMenuItem acercaDe = new JMenuItem("Acerca de");
+		opcionAyuda.add(acercaDe);
+		acercaDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object[] option = { "Volver" };
+				String mensaje = "Proyecto creado para Programación III por: \n     -Dante Melhado,  \n     -Ignacio Aranda Bao,  \n     -Emanuel Suarez.";
+				JOptionPane.showOptionDialog(ventanaJuego, mensaje, "Información del Proyecto", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+			}
+		
+	});
+	}	
+	
 
 	public void setDifficulty(int d) {
 		this.difficulty = d;
