@@ -1,13 +1,10 @@
-package tp1_p3_2024_2.interfaz;
+package interfaz;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import tp1_p3_2024_2.Fuente;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -18,7 +15,6 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	// IDENTIFICADORES DE VENTANA//
-	// TODO: Quiza convenga cambiar estos por Enum
 	final static String S_VENTANAMENU = "Ventana Menu";
 	final static String S_VENTANAJUEGO = "Ventana Juego";
 	final static String S_VENTANAOPCIONES = "Ventana Opciones";
@@ -30,21 +26,8 @@ public class MainFrame extends JFrame {
 	private int boardSize;
 	private int difficulty;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public MainFrame() {
-		setTitle("Rompecabezas Deslizante"); 
+		setTitle("Rompecabezas Deslizante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(new CardLayout(0, 0));
@@ -58,9 +41,9 @@ public class MainFrame extends JFrame {
 		getContentPane().add(ventanaMenu, S_VENTANAMENU);
 		getContentPane().add(ventanaOpciones, S_VENTANAOPCIONES);
 
-		this.boardSize = 4; // tamaños propuestos: 3 o mayores
-		this.difficulty = 2; // dificultades propuestas = 1, 2 o 3 (facil/normal/dificil, respectivamente)
-		
+		this.boardSize = 4;
+		this.difficulty = 2;
+
 		revalidate();
 		repaint();
 
@@ -114,13 +97,13 @@ public class MainFrame extends JFrame {
 
 		JMenu opcionAyuda = new JMenu("Ayuda");
 		menuBar.add(opcionAyuda);
-		
+
 		JMenuItem reglas = new JMenuItem("Cómo jugar");
 		opcionAyuda.add(reglas);
 		reglas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		            VentanaReglas dialog = new VentanaReglas(MainFrame.this);
-		            dialog.setVisible(true);
+				VentanaReglas dialog = new VentanaReglas(MainFrame.this);
+				dialog.setVisible(true);
 			}
 		});
 		JMenuItem acercaDe = new JMenuItem("Acerca de");
@@ -129,12 +112,12 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Object[] option = { "Volver" };
 				String mensaje = "Proyecto creado para Programación III por: \n     -Dante Melhado,  \n     -Ignacio Aranda Bao,  \n     -Emanuel Suarez.";
-				JOptionPane.showOptionDialog(ventanaJuego, mensaje, "Información del Proyecto", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
+				JOptionPane.showOptionDialog(ventanaJuego, mensaje, "Información del Proyecto",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, option, option[0]);
 			}
-		
-	});
-	}	
-	
+
+		});
+	}
 
 	public void setDifficulty(int d) {
 		this.difficulty = d;

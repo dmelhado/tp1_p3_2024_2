@@ -1,4 +1,4 @@
-package tp1_p3_2024_2;
+package logica;
 
 //El Score es estilo Golf, por eso se guarda en el betterScore la partida que haya hecho menos movimientos para ganar
 
@@ -8,7 +8,7 @@ public class Score {
 
 	// Constructor
 	public Score(int bestScore) {
-		this.score = -1;
+		this.score = 0;
 		this.bestScore = bestScore;
 	}
 
@@ -17,7 +17,7 @@ public class Score {
 	}
 
 	public void resetScore() {
-		this.score = -1;
+		this.score = 0;
 	}
 
 	// deberia llamarlo cuando termine la partida para comparar, no lo puedo llamar

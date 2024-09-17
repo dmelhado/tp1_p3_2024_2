@@ -1,10 +1,8 @@
-package tp1_p3_2024_2.interfaz;
+package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
@@ -13,11 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import tp1_p3_2024_2.GameBoard;
-import tp1_p3_2024_2.Score;
-import tp1_p3_2024_2.Direction;
-/*import tp1_p3_2024_2.MatrizImagen;*/
 
+import logica.Direction;
+import logica.GameBoard;
+import logica.Score;
 
 public class VentanaJuego extends JPanel {
 
@@ -69,6 +66,7 @@ public class VentanaJuego extends JPanel {
 					break;
 				}
 				if (dir != null && gameBoard.move(dir)) {
+					gameScore.addPoints();
 					actualizarTablero();
 				}
 			}
@@ -113,11 +111,6 @@ public class VentanaJuego extends JPanel {
 		JPanel RightPanel = new JPanel();
 		add(RightPanel, BorderLayout.EAST);
 
-		/*
-		 * MatrizImagen imageDivider = new MatrizImagen("docs/pixelart.jpg");
-		 * imageDivider.divideImagen(this.size, this.size); BufferedImage[][] imageParts
-		 * = imageDivider.getImageParts();
-		 */
 		buttons = new JButton[this.size][this.size];
 
 		for (int i = 0; i < this.size; i++) {
@@ -125,9 +118,9 @@ public class VentanaJuego extends JPanel {
 				JButton button = new JButton();
 				buttons[i][j] = button;
 
+				button.setFocusable(false);
 				button.setBackground(new Color(255, 255, 255));
 				button.setFont(mainFrame.fuentePersonalizada().deriveFont(25f));
-				button.addActionListener(new ButtonClickListener(i, j));
 				gamePanel.add(button);
 			}
 		}
@@ -142,11 +135,10 @@ public class VentanaJuego extends JPanel {
 
 	private void actualizarTablero() {
 
-		this.gameScore.addPoints();
-
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
 				int valor = gameBoard.getBoardValue(i, j);
+				buttons[i][j].setFocusable(false);
 				if (valor == 0) {
 					buttons[i][j].setText(""); // Espacio vacío, sin texto
 					buttons[i][j].setBackground(new Color(204, 204, 204)); // Color del botón vacío
@@ -181,35 +173,6 @@ public class VentanaJuego extends JPanel {
 	public void addNotify() {
 		super.addNotify();
 		requestFocusInWindow();
-	}
-
-	private class ButtonClickListener implements ActionListener {
-		private int x, y;
-
-		public ButtonClickListener(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			Direction dir = null;
-			int blankX = gameBoard.getBlankX();
-			int blankY = gameBoard.getBlankY();
-
-			if (x == blankX && y == blankY + 1) {
-				dir = Direction.U; // Arriba
-			} else if (x == blankX && y == blankY - 1) {
-				dir = Direction.D; // Abajo
-			} else if (y == blankY && x == blankX + 1) {
-				dir = Direction.L; // Izquierda
-			} else if (y == blankY && x == blankX - 1) {
-				dir = Direction.R; // Derecha
-			}
-
-			if (dir != null && gameBoard.move(dir)) {
-				actualizarTablero();
-			}
-		}
 	}
 
 }

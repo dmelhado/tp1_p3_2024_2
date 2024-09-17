@@ -1,5 +1,5 @@
 
-package tp1_p3_2024_2.interfaz;
+package interfaz;
 
 
 import java.awt.event.ActionEvent;

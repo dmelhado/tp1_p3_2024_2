@@ -1,4 +1,4 @@
-package tp1_p3_2024_2;
+package logica;
 
 public enum Direction {
 	U, D, L, R

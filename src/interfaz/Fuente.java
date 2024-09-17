@@ -1,4 +1,4 @@
-package tp1_p3_2024_2;
+package interfaz;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
