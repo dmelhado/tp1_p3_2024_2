@@ -1,7 +1,6 @@
 
 package interfaz;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -31,143 +30,117 @@ public class VentanaOpciones extends JPanel {
 		setSize(640, 480);
 		setLayout(new BorderLayout(0, 0));
 
-		JPanel midPanel = new JPanel();
-		add(midPanel, BorderLayout.CENTER);
+		// PANELES Y LABELS
+		JPanel panel_mid = new JPanel();
+		add(panel_mid, BorderLayout.CENTER);
 
-		JPanel topPanel = new JPanel();
-		add(topPanel, BorderLayout.NORTH);
+		JPanel panel_top = new JPanel();
+		add(panel_top, BorderLayout.NORTH);
 
-		JPanel bottomPanel = new JPanel();
-		add(bottomPanel, BorderLayout.SOUTH);
+		JPanel panel_bottom = new JPanel();
+		add(panel_bottom, BorderLayout.SOUTH);
 
-		JPanel westPanel = new JPanel();
-		westPanel.setPreferredSize(new Dimension(80, 0));
-		add(westPanel, BorderLayout.WEST);
+		JPanel panel_west = new JPanel();
+		panel_west.setPreferredSize(new Dimension(80, 0));
+		add(panel_west, BorderLayout.WEST);
 
-		JPanel eastPanel = new JPanel();
-		eastPanel.setPreferredSize(new Dimension(80, 0));
-		add(eastPanel, BorderLayout.EAST);
+		JPanel panel_east = new JPanel();
+		panel_east.setPreferredSize(new Dimension(80, 0));
+		add(panel_east, BorderLayout.EAST);
 
-		JPanel titlesPanel = new JPanel();
-		titlesPanel.setLayout(new GridLayout(1, 3));
-		midPanel.add(titlesPanel);
+		JPanel panel_titles = new JPanel();
+		panel_titles.setLayout(new GridLayout(1, 3));
+		panel_mid.add(panel_titles);
 
-		midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
-		
-		JLabel lblTamanyo = new JLabel("TAMAÑO");
-		titlesPanel.add(lblTamanyo);
-		lblTamanyo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTamanyo.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblTamanyo.setFont(mainFrame.fuentePersonalizada().deriveFont(28f));
-		
-		JLabel lblOpciones_1 = new JLabel("DIFICULTAD");
-		lblOpciones_1.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblOpciones_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOpciones_1.setFont(mainFrame.fuentePersonalizada().deriveFont(28f));
-		titlesPanel.add(lblOpciones_1);
-		
-		ButtonGroup btngrp_dificultad = new ButtonGroup();
-		ButtonGroup btngrp_tamanyo = new ButtonGroup();
-		
-		JPanel buttonsPanel = new JPanel();
-		midPanel.add(buttonsPanel);
-		buttonsPanel.setLayout(new GridLayout(1, 3));
-		
-		JPanel tamanyoButtons = new JPanel();
-		tamanyoButtons.setPreferredSize(new Dimension(20, 50));
-		buttonsPanel.add(tamanyoButtons);
-		tamanyoButtons.setLayout(new GridLayout(5, 1));
-		
-		JRadioButton rdbtn_3 = new JRadioButton("3x3");
-		rdbtn_3.setHorizontalAlignment(SwingConstants.CENTER);
-		tamanyoButtons.add(rdbtn_3);
-		btngrp_tamanyo.add(rdbtn_3);
-		
-		JRadioButton rdbtn_4 = new JRadioButton("4x4");
-		rdbtn_4.setSelected(true);
-		rdbtn_4.setHorizontalAlignment(SwingConstants.CENTER);
-		tamanyoButtons.add(rdbtn_4);
-		btngrp_tamanyo.add(rdbtn_4);
-		
-		JRadioButton rdbtn_5 = new JRadioButton("5x5");
-		rdbtn_5.setHorizontalAlignment(SwingConstants.CENTER);
-		tamanyoButtons.add(rdbtn_5);
-		btngrp_tamanyo.add(rdbtn_5);
-		
-		JRadioButton rdbtn_6 = new JRadioButton("6x6");
-		rdbtn_6.setHorizontalAlignment(SwingConstants.CENTER);
-		tamanyoButtons.add(rdbtn_6);
-		btngrp_tamanyo.add(rdbtn_6);
-		
-		JRadioButton rdbtn_7 = new JRadioButton("7x7");
-		rdbtn_7.setHorizontalAlignment(SwingConstants.CENTER);
-		tamanyoButtons.add(rdbtn_7);
-		btngrp_tamanyo.add(rdbtn_7);
-		
-		JPanel dificultadButtons = new JPanel();
-		dificultadButtons.setPreferredSize(new Dimension(20, 50));
-		buttonsPanel.add(dificultadButtons);
-		dificultadButtons.setLayout(new GridLayout(3, 1));
-		
-		JRadioButton rdbtn_facil = new JRadioButton("Facil");
-		rdbtn_facil.setHorizontalAlignment(SwingConstants.CENTER);
-		dificultadButtons.add(rdbtn_facil);
-		btngrp_dificultad.add(rdbtn_facil);
-		
-		JRadioButton rdbtn_medio = new JRadioButton("Medio");
-		rdbtn_medio.setSelected(true);
-		rdbtn_medio.setHorizontalAlignment(SwingConstants.CENTER);
-		dificultadButtons.add(rdbtn_medio);
-		btngrp_dificultad.add(rdbtn_medio);
-		
-		JRadioButton rdbtn_dificil = new JRadioButton("Dificil");
-		rdbtn_dificil.setHorizontalAlignment(SwingConstants.CENTER);
-		dificultadButtons.add(rdbtn_dificil);
-		btngrp_dificultad.add(rdbtn_dificil);
-		
-		JButton btnConfirmar = new JButton("Volver al Menú");
-		btnConfirmar.setPreferredSize(new Dimension(200, 50));
-		btnConfirmar.setFont(mainFrame.fuentePersonalizada().deriveFont(12f));
-		btnConfirmar.addActionListener(new ActionListener() {
+		panel_mid.setLayout(new BoxLayout(panel_mid, BoxLayout.Y_AXIS));
+
+		JLabel label_tamanyo = new JLabel("TAMAÑO");
+		panel_titles.add(label_tamanyo);
+		label_tamanyo.setVerticalAlignment(SwingConstants.BOTTOM);
+		label_tamanyo.setHorizontalAlignment(SwingConstants.CENTER);
+		label_tamanyo.setFont(mainFrame.fuentePersonalizada().deriveFont(28f));
+
+		JLabel label_opciones = new JLabel("DIFICULTAD");
+		label_opciones.setVerticalAlignment(SwingConstants.BOTTOM);
+		label_opciones.setHorizontalAlignment(SwingConstants.CENTER);
+		label_opciones.setFont(mainFrame.fuentePersonalizada().deriveFont(28f));
+		panel_titles.add(label_opciones);
+
+		JPanel panel_buttons = new JPanel();
+		panel_mid.add(panel_buttons);
+		panel_buttons.setLayout(new GridLayout(1, 3));
+
+		JPanel subpanel_tamanyos = new JPanel();
+		subpanel_tamanyos.setPreferredSize(new Dimension(20, 50));
+		panel_buttons.add(subpanel_tamanyos);
+		subpanel_tamanyos.setLayout(new GridLayout(5, 1));
+
+		JPanel subpanel_dificultades = new JPanel();
+		subpanel_dificultades.setPreferredSize(new Dimension(20, 50));
+		panel_buttons.add(subpanel_dificultades);
+		subpanel_dificultades.setLayout(new GridLayout(3, 1));
+
+		// BOTONES Y GRUPOS
+		ButtonGroup bGroup_dificultades = new ButtonGroup();
+		ButtonGroup bGroup_tamanyos = new ButtonGroup();
+
+		JRadioButton[] bArray_tamanyos = new JRadioButton[5];
+		JRadioButton[] bArray_dificultades = new JRadioButton[3];
+
+		String[] strArray_dificultades = { "Fácil", "Normal", "Dificil" };
+
+		// setear botones de tamaño y default (4x4)
+		for (int i = 0; i < bArray_tamanyos.length; i++) {
+			this.crearBoton((i + 3) + "x" + (i + 3), bArray_tamanyos, subpanel_tamanyos, bGroup_tamanyos, i);
+		}
+		bArray_tamanyos[1].setSelected(true);
+
+		// setear botones de dificultad y default (normal)
+		for (int i = 0; i < bArray_dificultades.length; i++) {
+			this.crearBoton(strArray_dificultades[i], bArray_dificultades, subpanel_dificultades, bGroup_dificultades,
+					i);
+		}
+		bArray_dificultades[1].setSelected(true);
+
+		JButton button_confirmar = new JButton("OK");
+		button_confirmar.setPreferredSize(new Dimension(200, 50));
+		button_confirmar.setFont(mainFrame.fuentePersonalizada().deriveFont(12f));
+		button_confirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(rdbtn_facil.isSelected()) {
-					mainFrame.setDifficulty(1);
+
+				// verificar cual esta seleccionada
+				for (int i = 0; i < bArray_tamanyos.length; i++) {
+					if (bArray_tamanyos[i].isSelected()) {
+						mainFrame.setBoardSize(i + 3);
+						break;
+					}
 				}
-				if(rdbtn_medio.isSelected()) {
-					mainFrame.setDifficulty(2);
+
+				for (int i = 0; i < bArray_dificultades.length; i++) {
+					if (bArray_dificultades[i].isSelected()) {
+						mainFrame.setDifficulty(i + 1);
+						break;
+					}
 				}
-				if(rdbtn_dificil.isSelected()) {
-					mainFrame.setDifficulty(3);
-				}
-				
-				if(rdbtn_3.isSelected()) {
-					mainFrame.setBoardSize(3);
-				}
-				if(rdbtn_4.isSelected()) {
-					mainFrame.setBoardSize(4);
-				}
-				if(rdbtn_5.isSelected()) {
-					mainFrame.setBoardSize(5);
-				}
-				if(rdbtn_6.isSelected()) {
-					mainFrame.setBoardSize(6);
-				}
-				if(rdbtn_7.isSelected()) {
-					mainFrame.setBoardSize(7);
-				}
-				
+
 				mainFrame.cambiarVentana(MainFrame.S_VENTANAMENU);
 			}
 		});
-		bottomPanel.add(btnConfirmar);
-		
-		// Aca se puede agregar boton reglas o dejarlo asi
-		JPanel emptyPanel = new JPanel();
-		
-				midPanel.add(emptyPanel);
+		panel_bottom.add(button_confirmar);
+
+		JPanel panel_bottomMidEmpty = new JPanel();
+
+		panel_mid.add(panel_bottomMidEmpty);
 
 		revalidate();
 		repaint();
+	}
+
+	private void crearBoton(String label, JRadioButton[] buttonArray, JPanel buttonPanel, ButtonGroup buttonGroup,
+			int index) {
+		buttonArray[index] = new JRadioButton(label);
+		buttonArray[index].setHorizontalAlignment(SwingConstants.CENTER);
+		buttonPanel.add(buttonArray[index]);
+		buttonGroup.add(buttonArray[index]);
 	}
 }
