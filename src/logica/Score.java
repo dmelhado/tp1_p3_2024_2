@@ -1,6 +1,6 @@
 package logica;
 
-//El Score es estilo Golf, por eso se guarda en el betterScore la partida que haya hecho menos movimientos para ganar
+//El Score es estilo Golf
 
 public class Score {
 	private int score;

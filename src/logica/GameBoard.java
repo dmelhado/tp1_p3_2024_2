@@ -111,23 +111,4 @@ public class GameBoard {
 	public int getBlankY() {
 		return blankY;
 	}
-
-	// Meter setters a lo loco es mala idea (rompe encapsulamiento)
-	// Por ahora los dejo aca abajo, pero creo que hay que evitarlos
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public void setBlankX(int blankX) {
-		this.blankX = blankX;
-	}
-
-	public void setBlankY(int blankY) {
-		this.blankY = blankY;
-	}
-
-	public void setBoard(int[][] board) {
-		this.board = board;
-	}
 }
