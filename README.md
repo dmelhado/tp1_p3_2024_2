@@ -3,4 +3,5 @@ Primer trabajo practico de Programacion 3 - UNGS 2024-2
 
 ## Integrantes:
 - Dante Melhado
-
+- Ignacio Aranda Bao
+- Emanuel Suarez
