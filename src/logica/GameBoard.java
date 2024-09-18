@@ -13,14 +13,14 @@ public class GameBoard {
 		this.board = new int[s][s];
 
 		// Poblar tablero con solución (ordenado horizontalmente)
-		int number = 1; // Comenzar desde 1
+		int number = 1; 
 		for (int i = 0; i < s; i++) {
 			for (int j = 0; j < s; j++) {
 				// Asignar el número actual
 				this.board[i][j] = number;
 				number++;
 
-				// Si es el último casillero, llenarlo con 0 y guardar la posición
+				
 				if (i == s - 1 && j == s - 1) {
 					this.board[i][j] = 0;
 					this.blankX = i;
@@ -31,7 +31,7 @@ public class GameBoard {
 		this.randomize((int) (Math.pow(s, 2) * Math.pow(2, diff)));
 	}
 
-	// true si movio ok, false si no se pudo mover
+	
 	public boolean move(Direction dir) {
 		int nextX = this.blankX;
 		int nextY = this.blankY;
@@ -64,9 +64,7 @@ public class GameBoard {
 		return true;
 	}
 
-	// TODO: esta funcion no va a servir si se quiere ver como se randomiza todo en
-	// vivo
-	// desde la interfaz
+	
 	private void randomize(int c) {
 		Random r = new Random();
 		while (c > 0) {

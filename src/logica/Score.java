@@ -20,8 +20,7 @@ public class Score {
 		this.score = 0;
 	}
 
-	// deberia llamarlo cuando termine la partida para comparar, no lo puedo llamar
-	// antes porque si no se guardaria siempre 1 movimiento solo
+	
 	public void updateBestScore() {
 		if (this.score < this.bestScore) {
 			this.bestScore = this.score;

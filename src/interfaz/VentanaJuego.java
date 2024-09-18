@@ -31,7 +31,7 @@ public class VentanaJuego extends JPanel {
 		this.mainFrame = mainFrame;
 		this.size = opt_size;
 		this.gameBoard = new GameBoard(opt_size, opt_diff);
-		this.gameScore = new Score(0); // TODO: meter aca el best score como input
+		this.gameScore = new Score(0); 
 		iniciarJuego();
 
 		addKeyListener(new KeyAdapter() {
@@ -89,11 +89,8 @@ public class VentanaJuego extends JPanel {
 		lblTitulo.setFont(mainFrame.fuentePersonalizada().deriveFont(40f));
 		topPanel.add(lblTitulo);
 
-		// Panel central para el tablero
-		JPanel gamePanel = new JPanel(new GridLayout(this.size + 1, this.size + 1)); // agrego +1 para poder ver el
-																						// tablero en el design, sino no
-																						// deja ya que gridLayout no
-																						// puede inicializar en 0,0
+		// Panel central para el tablero. Si se quiere usar el design, agregar this.size + 1. GridLayout no puede empezar en (0,0)
+		JPanel gamePanel = new JPanel(new GridLayout(this.size, this.size)); 
 		gamePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Agregar espaciado entre los botones
 		add(gamePanel, BorderLayout.CENTER);
 
@@ -140,14 +137,13 @@ public class VentanaJuego extends JPanel {
 				int valor = gameBoard.getBoardValue(i, j);
 				buttons[i][j].setFocusable(false);
 				if (valor == 0) {
-					buttons[i][j].setText(""); // Espacio vacío, sin texto
+					buttons[i][j].setText(""); 
 					buttons[i][j].setBackground(new Color(204, 204, 204)); // Color del botón vacío
 				} else {
-					buttons[i][j].setText(String.valueOf(valor)); // numero boton
+					buttons[i][j].setText(String.valueOf(valor)); 
 					buttons[i][j].setBackground(null); // Color demas botones
 					buttons[i][j].setForeground(new Color(255, 153, 0));
-					buttons[i][j].setFont(mainFrame.fuentePersonalizada().deriveFont(30f)); // Cambiar el tamaño de la
-																							// fuente
+					buttons[i][j].setFont(mainFrame.fuentePersonalizada().deriveFont(30f)); 
 					buttons[i][j].setForeground(Color.WHITE); // Cambiar el color del texto
 					buttons[i][j].setBackground(new Color(70, 130, 180)); // Cambiar el color de fondo
 				}
